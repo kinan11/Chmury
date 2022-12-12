@@ -1,0 +1,86 @@
+{% extends "index.html" %}
+{% block content %}
+    <h2>Edytuj dane</h2>
+    {% for mesg in get_flashed_messages() %}
+          <h3>{{ mesg }}</h3>
+    {% endfor %}
+    <div class = "xxx">
+        <form method="POST">
+            <label>Imię * </label>
+            <input type="text" name="fname"
+                   placeholder="Imię"
+                   value="{{ person['fname'] }}">
+            <label>Nazwisko * </label>
+            <input type="text" name="lname"
+                   placeholder="Nazwisko"
+                   value="{{ person['lname'] }}">
+            <br>
+            <label>Data urodzenia * </label>
+            <input type="date" name="dbirth"
+                   value="{{ person['dbirth'] }}">
+            <br>
+            <label>Data śmierci </label>
+            <input type="date" name="ddeath"
+                   value="{{ person['ddeath'] }}">
+            <br>
+            <select name="gender" id="gender">
+                {% if  person['gender'] == 'mężczyzna' %}
+                    <option value="mężczyzna" selected>Mężczyzna</option>
+                    <option value="kobieta">Kobieta</option>
+                {% else %}
+                    <option value="mężczyzna">Mężczyzna</option>
+                    <option value="kobieta" selected>Kobieta</option>
+                {% endif %}
+            </select>
+            <br>
+            <table>
+                <tr>
+                    <td>
+                        <label>Imię matki </label>
+                        <input type="text" name="mname"
+                            value="{{ person['mname'] }}">
+                    </td>
+                    <td>
+                        <label>Imię ojca </label>
+                        <input type="text" name="dname"
+                            value="{{ person['dname'] }}">
+                    </td>
+                    <td>
+                        <label>Imię małżonka </label>
+                        <input type="text" name="sname"
+                            value="{{ person['sname'] }}">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Nazwisko matki </label>
+                        <input type="text" name="mlname"
+                            value="{{ person['mlname'] }}">
+                    </td>
+                    <td>
+                        <label>Nazwisko ojca </label>
+                        <input type="text" name="dlname"
+                            value="{{ person['dlname'] }}">
+                    </td>
+                    <td>
+                        <label>Nazwisko małżonka </label>
+                        <input type="text" name="slname"
+                            value="{{ person['slname'] }}">
+                    </td>
+                </tr>
+            </table>
+            {% for i in range(children|length) %}
+            <label>Imię dziecka </label>
+            <input type="text" name={{"cf"+i|string}}
+                   value="{{children[i]['children.fname']}}">
+            <label>Nazwisko dziecka </label>
+            <input type="text" name={{"cl"+i|string}}
+                   value="{{children[i]['children.lname']}}">
+            <br>
+            {% endfor %}
+            <button type="submit" value={{children|length}} name="child">Dodaj dziecko</button>
+            <br>
+            <button type="submit" value={{children|length}} name="edit">Dodaj</button>
+        </form>
+    </div>
+{% endblock %}

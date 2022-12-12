@@ -1,0 +1,53 @@
+{% extends "index.html" %}
+{% block content %}
+<h2>Znajdź zależność dla osoby: {{fname}} {{lname}}</h2>
+    <div class = "xxx">
+        <form method="POST">
+            <button type="submit" value ="mother" name="mother">Matka</button>
+            <button type="submit" value ="father" name="father">Ojciec</button>
+            <button type="submit" value ="sister" name="brother">Brat</button>
+            <button type="submit" value ="brother" name="sister">Siostra</button>
+            <button type="submit" value ="grandmother" name="grandmother">Babcia</button>
+            <button type="submit" value ="grandfather" name="grandfather">Dziadek</button>
+            <label>Imię</label>
+            <input type="text" name="fname"
+                   placeholder="Imię"
+                   value="{{ request.form['fname'] }}">
+            <label>Nazwisko</label>
+            <input type="text" name="lname"
+                   placeholder="Nazwisko"
+                   value="{{ request.form['lname'] }}">
+             <button type="submit" value ="family" name="family">Szukaj</button>
+
+        </form>
+    </div>
+    <div>
+        {% if type == 'mother'%}
+            <h2>Matka: {{zal[0]}}  {{zal[1]}} </h2>
+        {% elif type == 'error' %}
+            {% for mesg in get_flashed_messages() %}
+                  <h2>{{ mesg }}</h2>
+            {% endfor %}
+        {% elif type == 'father' %}
+            <h2>Ojciec: {{zal[0]}}  {{zal[1]}} </h2>
+        {% elif type == 'brother' %}
+            {% for b in zal %}
+                <h2>Brat: {{b[0]}}  {{b[1]}} </h2>
+            {% endfor %}
+        {% elif type == 'sister' %}
+            {% for s in zal %}
+                <h2>Siostra: {{s[0]}}  {{s[1]}} </h2>
+            {% endfor %}
+        {% elif type == 'grandmother' %}
+            {% for g in zal %}
+                <h2>Babcia: {{g[0]}}  {{g[1]}} </h2>
+            {% endfor %}
+        {% elif type == 'grandfather' %}
+            {% for g in zal %}
+                <h2>Dziadek: {{g[0]}}  {{g[1]}} </h2>
+            {% endfor %}
+        {% elif type == 'family' %}
+            <h2>{{zal}}</h2>
+        {% endif %}
+    </div>
+{% endblock %}

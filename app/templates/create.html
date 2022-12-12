@@ -1,0 +1,72 @@
+{% extends "index.html" %}
+
+{% block content %}
+<h2>Dodaj członka rodziny</h2>
+{% for mesg in get_flashed_messages() %}
+      <h3>{{ mesg }}</h3>
+{% endfor %}
+<div class = "xxx">
+    <form method="POST">
+        <label>Imię * </label>
+        <input type="text" name="fname"
+               placeholder="Imię"
+               value="{{ request.form['fname'] }}">
+        <br>
+        <label>Nazwisko * </label>
+        <input type="text" name="lname"
+               placeholder="Nazwisko"
+               value="{{ request.form['lname'] }}">
+        <br>
+        <label>Data urodzenia * </label>
+        <input type="date" name="dbirth"
+               value="{{ request.form['dbirth'] }}">
+        <br>
+        <label>Data śmierci </label>
+        <input type="date" name="ddeath"
+               value="{{ request.form['ddeath'] }}">
+        <br>
+        <select name="gender" id="gender">
+            <option value="mężczyzna">Mężczyzna</option>
+            <option value="kobieta">Kobieta</option>
+        </select>
+        <br>
+        <table>
+            <tr>
+                <td>
+                    <label>Imię matki </label>
+                    <input type="text" name="mname"
+                        value="{{ request.form['mname'] }}">
+                </td>
+                <td>
+                    <label>Imię ojca </label>
+                    <input type="text" name="dname"
+                        value="{{ request.form['dname'] }}">
+                </td>
+                <td>
+                    <label>Imię małżonka </label>
+                    <input type="text" name="sname"
+                        value="{{ request.form['sname'] }}">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Nazwisko matki </label>
+                    <input type="text" name="mlname"
+                        value="{{ request.form['mlname'] }}">
+                </td>
+                <td>
+                    <label>Nazwisko ojca </label>
+                    <input type="text" name="dlname"
+                        value="{{ request.form['dlname'] }}">
+                </td>
+                <td>
+                    <label>Nazwisko małżonka </label>
+                    <input type="text" name="slname"
+                        value="{{ request.form['slname'] }}">
+                </td>
+            </tr>
+        </table>
+        <button type="submit">Dodaj</button>
+    </form>
+</div>
+{% endblock %}
